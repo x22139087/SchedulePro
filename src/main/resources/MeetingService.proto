@@ -1,0 +1,68 @@
+
+// It defines the necessary message types and RPC methods for managing reminders in the user's account. The AddReminders and UpdateReminders methods are defined as client streaming, while the GetReminders and ListReminders methods are defined as server streaming, allowing the server to send multiple reminder objects to the client. The DeleteReminder method is defined as a unary RPC method, taking a single reminder ID and returning a SharedResponse message with a boolean success field indicating whether the operation was successful or not.
+// One thing to note is that the UpdateReminders method returns a stream UpdateReminderResponse message, allowing the server to send multiple update responses back to the client if multiple reminders are being updated simultaneously. Each UpdateReminderResponse message contains a string id field and a boolean success field, indicating whether the update was successful or not for each reminder.
+
+syntax = "proto3";
+
+package schedulePro.meeting;
+
+option java_package = "schedulePro.meeting";
+option java_multiple_files = true;
+
+// Meeting service
+message Meeting {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  int64 start_time = 4;
+  int64 end_time = 5;
+  repeated string participants = 6;
+}
+
+message ScheduleMeetingRequest {
+  Meeting meeting = 1;
+}
+
+message ScheduleMeetingResponse {
+  string id = 1;
+}
+
+message Empty {}
+
+message SharedResponse {
+  bool success = 1;
+}
+
+message MeetingNotification {
+  string meeting_id = 1;
+  int64 start_time = 2;
+  int64 end_time = 3;
+}
+
+message AddParticipantRequest {
+  string meeting_id = 1;
+  string participant_id = 2;
+}
+
+message RemoveParticipantRequest {
+  string meeting_id = 1;
+  string participant_id = 2;
+}
+
+service MeetingService {
+  // Schedules a new meeting.
+  rpc ScheduleMeeting(ScheduleMeetingRequest) returns (ScheduleMeetingResponse) {}
+
+  // Retrieves all meetings for the current user.
+  rpc ListMeetings(Empty) returns (stream Meeting) {}
+
+  // Adds a participant to a meeting.
+  rpc AddParticipant(AddParticipantRequest) returns (SharedResponse) {}
+
+  // Removes a participant from a meeting.
+  rpc RemoveParticipant(RemoveParticipantRequest) returns (SharedResponse) {}
+
+  // Notifies all participants of a meeting that it is starting and ending.
+  rpc NotifyParticipants(stream MeetingNotification) returns (SharedResponse) {}
+}
+

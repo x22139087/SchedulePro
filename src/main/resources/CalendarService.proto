@@ -1,0 +1,76 @@
+//It defines the necessary RPC methods for managing events in the user's calendar, including adding, retrieving, listing, updating, deleting, and subscribing to events. The AddEvents and UpdateEvents methods are defined as client streaming, while the DeleteEvents method is defined as bidirectional streaming. The SubscribeToEvents method is also defined as bidirectional streaming, allowing the server to send updates to the client when events are added or removed.
+//    One thing to note is that the UpdateEvents method returns an Empty message, indicating that the response does not contain any data. This is because the update operation does not return any specific information about the updated events. Similarly, the DeleteEvents method returns a SharedResponse message with a boolean success field, indicating whether the operation was successful or not.
+syntax = "proto3";
+
+package calendar;
+
+option java_package = "schedulePro.calendar";
+option java_multiple_files = true;
+
+// Calendar service
+message Event {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  int64 start_time = 4;
+  int64 end_time = 5;
+  repeated string attendee = 6;
+}
+
+message AddEventRequest {
+  string title = 1;
+  string description = 2;
+  int64 start_time = 3;
+  int64 end_time = 4;
+}
+
+message AddEventResponse {
+  string id = 1;
+}
+
+message GetEventRequest {
+  string id = 1;
+}
+
+message Empty { }
+
+message UpdateEventRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  int64 start_time = 4;
+  int64 end_time = 5;
+}
+
+message DeleteEventRequest {
+  string id = 1;
+}
+
+message SubscribeToEventResponse {
+  string id = 1;
+  bool success = 2;
+}
+
+message SubscribeToEventRequest {
+  string event_id = 1;
+}
+
+message SharedResponse {
+  bool success = 1;
+}
+
+service CalendarService {
+
+  // Adds new events to the current user's calendar.
+  rpc AddEvents(stream AddEventRequest) returns (stream AddEventResponse) {}
+
+  // Retrieves events with given IDs.
+  rpc GetEvents(stream GetEventRequest) returns (stream Event) {}
+
+  // Retrieves all events for the current user.
+  rpc ListEvents(Empty) returns (stream Event) {}
+
+  // Subscribes the current user to events with given IDs.
+  rpc SubscribeToEvents(stream SubscribeToEventRequest) returns (stream SubscribeToEventResponse) {}
+}
+

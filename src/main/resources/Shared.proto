@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package schedulePro.reminder;
+
+option java_package = "schedulePro.reminder";
+option java_multiple_files = true;
+
+message DeleteRequest {
+  string id = 1;
+}
+
+message Response {
+  bool success = 1;
+  string message = 2;
+}

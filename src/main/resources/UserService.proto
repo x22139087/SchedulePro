@@ -1,0 +1,65 @@
+
+//It defines the necessary message types and RPC methods for managing user authentication and registration. The Login method takes a LoginRequest message containing the user's username and password, and returns a LoginResponse message containing a token that can be used for subsequent authenticated requests. The Logout method is defined as a unary RPC method taking an Empty message, and returns a LogoutResponse message with a boolean success field indicating whether the operation was successful or not. The Register method takes a RegisterRequest message containing the user's desired username and password, and returns a RegisterResponse message with a string message field.
+//One thing to note is that the ListLoggedInUsers method is defined as a bidirectional streaming RPC method taking an Empty message and returning a stream of User messages. This allows the server to push real-time updates of the list of currently logged in users to the client.
+
+syntax = "proto3";
+
+package user;
+
+option java_package = "schedulePro.user";
+option java_multiple_files = true;
+
+// User authentication service
+service UserService {
+  // Authenticates the user with the provided credentials.
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+
+  // Logs out the currently authenticated user.
+  rpc Logout(LogoutRequest) returns (LogoutResponse) {}
+
+  // Registers a new user.
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+
+  // Streaming bidirectionally the list of logged in users
+  rpc ListLoggedInUsers(Empty) returns (stream User) {}
+}
+
+message LogoutRequest {
+  string userId = 1;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+  string userId = 2;
+}
+
+message SharedResponse {
+	bool success = 1;
+}
+
+message Empty {
+
+}
+
+message LogoutResponse {
+	bool success = 1;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
+  string message = 1;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+}
