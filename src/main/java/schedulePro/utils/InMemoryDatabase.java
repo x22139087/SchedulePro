@@ -125,8 +125,8 @@ public class InMemoryDatabase {
                 .setId("1")
                 .setTitle("Meeting 1")
                 .setDescription("Meeting 1 Description")
-                .setStartTime(startTime + 1 * 60 * 60 * 1000)
-                .setEndTime(startTime + 1 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000)
+                .setStartTime(startTime + 3600000 )
+                .setEndTime(startTime + 10800000)
                 .build();
 
         createMeeting(user1.getId(), meeting1);
@@ -138,8 +138,8 @@ public class InMemoryDatabase {
                 .setId("2")
                 .setTitle("Meeting 2")
                 .setDescription("Meeting 2 Description")
-                .setStartTime(startTime + 2 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000)
-                .setEndTime(startTime + 2 * 24 * 60 * 60 * 1000 + 3 * 60 * 60 * 1000)
+                .setStartTime(startTime + 180000000)
+                .setEndTime(startTime + 189600000)
                 .build();
 
         createMeeting(user1.getId(), meeting2);
@@ -151,8 +151,8 @@ public class InMemoryDatabase {
                 .setId("3")
                 .setTitle("Meeting 3")
                 .setDescription("Meeting 3 Description")
-                .setStartTime(startTime + 3 * 24 * 60 * 60 * 1000)
-                .setEndTime(startTime + 3 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000)
+                .setStartTime(startTime + 259200000 )
+                .setEndTime(startTime + 266400000)
                 .build();
 
         createMeeting(user1.getId(), meeting3);
@@ -164,8 +164,8 @@ public class InMemoryDatabase {
                 .setId("4")
                 .setTitle("Meeting 4")
                 .setDescription("Meeting 4 Description")
-                .setStartTime(startTime + 4 * 24 * 60 * 60 * 1000 + 60 * 60 * 1000)
-                .setEndTime(startTime + 4 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000)
+                .setStartTime(startTime + 345600000)
+                .setEndTime(startTime + 352800000)
                 .build();
 
         createMeeting(user1.getId(), meeting4);
@@ -177,8 +177,8 @@ public class InMemoryDatabase {
                 .setId("5")
                 .setTitle("Meeting 5")
                 .setDescription("Meeting 5 Description")
-                .setStartTime(startTime + 5 * 24 * 60 * 60 * 1000 + 60 * 60 * 1000)
-                .setEndTime(startTime + 5 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000)
+                .setStartTime(startTime + 432600000 )
+                .setEndTime(startTime + 432000000)
                 .build();
 
         createMeeting(user1.getId(), meeting5);
@@ -192,7 +192,7 @@ public class InMemoryDatabase {
 
 // Reminder for user1
         Reminder reminder1 = Reminder.newBuilder()
-                .setId(user1.getId())
+                .setId("1")
                 .setTitle("Reminder 1")
                 .setDescription("Reminder 1 description")
                 .setTime(now.plusMinutes(10).toEpochSecond(ZoneOffset.UTC))
@@ -202,7 +202,7 @@ public class InMemoryDatabase {
 
 // Reminder for user3
         Reminder reminder2 = Reminder.newBuilder()
-                .setId(user3.getId())
+                .setId("2")
                 .setTitle("Reminder 2")
                 .setDescription("Reminder 2 description")
                 .setTime(now.plusMinutes(20).toEpochSecond(ZoneOffset.UTC))
@@ -212,7 +212,7 @@ public class InMemoryDatabase {
 
 // Reminder for user1
         Reminder reminder3 = Reminder.newBuilder()
-                .setId(user1.getId())
+                .setId("3")
                 .setTitle("Reminder 3")
                 .setDescription("Reminder 3 description")
                 .setTime(now.plusMinutes(30).toEpochSecond(ZoneOffset.UTC))
@@ -222,7 +222,7 @@ public class InMemoryDatabase {
 
 // Reminder for user3
         Reminder reminder4 = Reminder.newBuilder()
-                .setId(user3.getId())
+                .setId("4")
                 .setTitle("Reminder 4")
                 .setDescription("Reminder 4 description")
                 .setTime(now.plusMinutes(40).toEpochSecond(ZoneOffset.UTC))
@@ -232,7 +232,7 @@ public class InMemoryDatabase {
 
 // Reminder for user1
         Reminder reminder5 = Reminder.newBuilder()
-                .setId(user1.getId())
+                .setId("5")
                 .setTitle("Reminder 5")
                 .setDescription("Reminder 5 description")
                 .setTime(now.plusMinutes(50).toEpochSecond(ZoneOffset.UTC))
@@ -242,7 +242,7 @@ public class InMemoryDatabase {
 
 // Reminder for user3
         Reminder reminder6 = Reminder.newBuilder()
-                .setId(user3.getId())
+                .setId("6")
                 .setTitle("Reminder 6")
                 .setDescription("Reminder 6 description")
                 .setTime(now.plusMinutes(60).toEpochSecond(ZoneOffset.UTC))
@@ -252,7 +252,7 @@ public class InMemoryDatabase {
 
 // Reminder for user1
         Reminder reminder7 = Reminder.newBuilder()
-                .setId(user1.getId())
+                .setId("7")
                 .setTitle("Reminder 7")
                 .setDescription("Reminder 7 description")
                 .setTime(now.plusMinutes(70).toEpochSecond(ZoneOffset.UTC))
@@ -262,7 +262,7 @@ public class InMemoryDatabase {
 
 // Reminder for user3
         Reminder reminder8 = Reminder.newBuilder()
-                .setId(user3.getId())
+                .setId("8")
                 .setTitle("Reminder 8")
                 .setDescription("Reminder 8 description")
                 .setTime(now.plusMinutes(80).toEpochSecond(ZoneOffset.UTC))
@@ -272,7 +272,7 @@ public class InMemoryDatabase {
 
 // Reminder for user1
         Reminder reminder9 = Reminder.newBuilder()
-                .setId(user1.getId())
+                .setId("9")
                 .setTitle("Reminder 9")
                 .setDescription("Reminder 9 description")
                 .setTime(now.plusMinutes(90).toEpochSecond(ZoneOffset.UTC))
@@ -282,7 +282,7 @@ public class InMemoryDatabase {
 
 // Reminder for user3
         Reminder reminder10 = Reminder.newBuilder()
-                .setId(user3.getId())
+                .setId("10")
                 .setTitle("Reminder 10")
                 .setDescription("Reminder 10 description")
                 .setTime(now.plusMinutes(100).toEpochSecond(ZoneOffset.UTC))

@@ -6,6 +6,10 @@ import schedulePro.services.ReminderServiceImpl;
 
 import java.io.IOException;
 
+/**
+ * This class is the server for the Reminder service. It creates and starts a gRPC server using the provided service and port.
+ * It has methods to start and stop the server, as well as block until the server is shut down.
+ */
 public class ReminderServer {
     private Server server;
 

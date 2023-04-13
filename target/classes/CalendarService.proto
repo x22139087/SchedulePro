@@ -64,9 +64,6 @@ service CalendarService {
   // Adds new events to the current user's calendar.
   rpc AddEvents(stream AddEventRequest) returns (stream AddEventResponse) {}
 
-  // Retrieves events with given IDs.
-  rpc GetEvents(stream GetEventRequest) returns (stream Event) {}
-
   // Retrieves all events for the current user.
   rpc ListEvents(Empty) returns (stream Event) {}
 

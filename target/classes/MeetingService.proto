@@ -59,10 +59,5 @@ service MeetingService {
   // Adds a participant to a meeting.
   rpc AddParticipant(AddParticipantRequest) returns (SharedResponse) {}
 
-  // Removes a participant from a meeting.
-  rpc RemoveParticipant(RemoveParticipantRequest) returns (SharedResponse) {}
-
-  // Notifies all participants of a meeting that it is starting and ending.
-  rpc NotifyParticipants(stream MeetingNotification) returns (SharedResponse) {}
 }
 
