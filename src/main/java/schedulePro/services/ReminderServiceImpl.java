@@ -45,7 +45,6 @@ public class ReminderServiceImpl extends ReminderServiceGrpc.ReminderServiceImpl
         responseObserver.onCompleted();
     }
 
-    // Implement the listReminders() method
     @Override
     public void listReminders(ListRemindersRequest request, StreamObserver<Reminder> responseObserver) {
 

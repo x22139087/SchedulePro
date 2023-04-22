@@ -15,9 +15,9 @@ public class InMemoryDatabase {
     private final Map<String, List<Meeting>> meetingDatabase = new HashMap<>();
     private final Map<String, User> userDatabase = new HashMap<>();
     private final Map<String, String> userSessions = new HashMap<>();
-    private Map<String, List<Reminder>> remindersDatabase = new HashMap<>();
-    private Map<String, Event> eventsDatabase = new HashMap<>();
-    private Map<String, List<String>> eventAttendees = new HashMap<>();
+    private final Map<String, List<Reminder>> remindersDatabase = new HashMap<>();
+    private final Map<String, Event> eventsDatabase = new HashMap<>();
+    private final Map<String, List<String>> eventAttendees = new HashMap<>();
 
     public InMemoryDatabase() {
         generateTestData();
@@ -190,7 +190,7 @@ public class InMemoryDatabase {
 
         LocalDateTime now = LocalDateTime.now();
 
-// Reminder for user1
+        // Reminder for user1
         Reminder reminder1 = Reminder.newBuilder()
                 .setId("1")
                 .setTitle("Reminder 1")
@@ -200,7 +200,7 @@ public class InMemoryDatabase {
 
         createReminder(user1.getId(), reminder1);
 
-// Reminder for user3
+        // Reminder for user3
         Reminder reminder2 = Reminder.newBuilder()
                 .setId("2")
                 .setTitle("Reminder 2")
@@ -210,7 +210,7 @@ public class InMemoryDatabase {
 
         createReminder(user3.getId(), reminder2);
 
-// Reminder for user1
+        // Reminder for user1
         Reminder reminder3 = Reminder.newBuilder()
                 .setId("3")
                 .setTitle("Reminder 3")
@@ -220,7 +220,7 @@ public class InMemoryDatabase {
 
         createReminder(user1.getId(), reminder3);
 
-// Reminder for user3
+        // Reminder for user3
         Reminder reminder4 = Reminder.newBuilder()
                 .setId("4")
                 .setTitle("Reminder 4")
@@ -230,7 +230,7 @@ public class InMemoryDatabase {
 
         createReminder(user3.getId(), reminder4);
 
-// Reminder for user1
+        // Reminder for user1
         Reminder reminder5 = Reminder.newBuilder()
                 .setId("5")
                 .setTitle("Reminder 5")
@@ -240,7 +240,7 @@ public class InMemoryDatabase {
 
         createReminder(user1.getId(), reminder5);
 
-// Reminder for user3
+        // Reminder for user3
         Reminder reminder6 = Reminder.newBuilder()
                 .setId("6")
                 .setTitle("Reminder 6")
@@ -250,7 +250,7 @@ public class InMemoryDatabase {
 
         createReminder(user3.getId(), reminder6);
 
-// Reminder for user1
+        // Reminder for user1
         Reminder reminder7 = Reminder.newBuilder()
                 .setId("7")
                 .setTitle("Reminder 7")
@@ -260,7 +260,7 @@ public class InMemoryDatabase {
 
         createReminder(user1.getId(), reminder7);
 
-// Reminder for user3
+        // Reminder for user3
         Reminder reminder8 = Reminder.newBuilder()
                 .setId("8")
                 .setTitle("Reminder 8")
@@ -270,7 +270,7 @@ public class InMemoryDatabase {
 
         createReminder(user3.getId(), reminder8);
 
-// Reminder for user1
+        // Reminder for user1
         Reminder reminder9 = Reminder.newBuilder()
                 .setId("9")
                 .setTitle("Reminder 9")
@@ -280,7 +280,7 @@ public class InMemoryDatabase {
 
         createReminder(user1.getId(), reminder9);
 
-// Reminder for user3
+        // Reminder for user3
         Reminder reminder10 = Reminder.newBuilder()
                 .setId("10")
                 .setTitle("Reminder 10")
@@ -293,7 +293,7 @@ public class InMemoryDatabase {
     }
 
 
-        public void addUser(User user) {
+    public void addUser(User user) {
         userDatabase.put(user.getId(), user);
     }
 
@@ -333,21 +333,6 @@ public class InMemoryDatabase {
         return calendarDatabase.getOrDefault(userId, new ArrayList<>());
     }
 
-    public synchronized void updateCalendarEvent(String userId, Event event) {
-        if (!calendarDatabase.containsKey(userId)) {
-            calendarDatabase.put(userId, new ArrayList<>());
-        }
-
-        List<Event> events = calendarDatabase.get(userId);
-        for (int i = 0; i < events.size(); i++) {
-            if (events.get(i).getId().equals(event.getId())) {
-                events.set(i, event);
-                return;
-            }
-        }
-        events.add(event);
-    }
-
     public boolean addUserToEvent(String eventId, String userId) {
         if (!calendarDatabase.containsKey(userId)) {
             return false;
@@ -373,24 +358,6 @@ public class InMemoryDatabase {
 
     public List<String> getAttendeesForEvent(String eventId) {
         return eventAttendees.getOrDefault(eventId, Collections.emptyList());
-    }
-
-    public boolean removeCalendarEvent(String userId, String eventId) {
-        List<Event> events = calendarDatabase.get(userId);
-        if (events == null) {
-            return false;
-        }
-
-        Iterator<Event> iterator = events.iterator();
-        while (iterator.hasNext()) {
-            Event event = iterator.next();
-            if (event.getId().equals(eventId)) {
-                iterator.remove();
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public void createMeeting(String id, Meeting meeting) {
@@ -421,12 +388,6 @@ public class InMemoryDatabase {
                 break;
             }
         }
-        meetingDatabase.put(id, meetings);
-    }
-
-    public void deleteMeeting(String id, String meetingId) {
-        List<Meeting> meetings = meetingDatabase.getOrDefault(id, new ArrayList<>());
-        meetings.removeIf(meeting -> meeting.getId().equals(meetingId));
         meetingDatabase.put(id, meetings);
     }
 

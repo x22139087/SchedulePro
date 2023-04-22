@@ -2,9 +2,7 @@ package schedulePro.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.StreamObserver;
 import schedulePro.calendar.AddEventResponse;
-import schedulePro.calendar.SubscribeToEventResponse;
 import schedulePro.reminder.*;
 import schedulePro.utils.UserContext;
 
@@ -71,7 +69,7 @@ public class ReminderServiceClient {
     }
 
     // Delete a reminder with the given ID and return a boolean indicating success or failure
-    public boolean deleteReminder(String reminderId) {
+    public boolean showDeleteReminderUI(String reminderId) {
 
         DeleteRequest request = DeleteRequest.newBuilder().setId(reminderId).build();
         Response response = blockingStub.deleteReminder(request);
@@ -80,14 +78,14 @@ public class ReminderServiceClient {
     }
 
     // Show a dialog to delete a reminder
-    void deleteReminder() throws Exception {
+    void showDeleteReminderUI() throws Exception {
         String reminderId = JOptionPane.showInputDialog("Enter Reminder ID:");
         if (reminderId == null || reminderId.isEmpty()) {
             throw new Exception("Invalid reminder ID.");
         }
 
         ReminderServiceClient reminderClient = new ReminderServiceClient("localhost", 50053);
-        boolean response = reminderClient.deleteReminder(reminderId);
+        boolean response = reminderClient.showDeleteReminderUI(reminderId);
 
         if (response) {
             JOptionPane.showMessageDialog(null, "Reminder with ID: " + reminderId + " deleted.");
@@ -104,7 +102,7 @@ public class ReminderServiceClient {
     /**
      * Displays a dialog to schedule a new reminder
      */
-    void showScheduleReminderDialog() {
+    void showScheduleReminderUI() {
 
         // Create a panel with fields to input reminder details
         JPanel panel = new JPanel(new GridLayout(0, 1));
@@ -151,7 +149,7 @@ public class ReminderServiceClient {
      @param component the parent component of the dialog
      @throws Exception if the user is not logged in
      */
-    void showListRemindersDialog(Component component) throws Exception {
+    void showListRemindersUI(Component component) throws Exception {
 
         // Get the ID of the logged-in user
         String userId = UserContext.getLoggedInUserId();

@@ -2,7 +2,6 @@ package schedulePro.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.StreamObserver;
 import schedulePro.calendar.AddEventResponse;
 import schedulePro.meeting.*;
 import schedulePro.utils.UserContext;
@@ -15,7 +14,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.concurrent.ExecutionException;
 
 /**
  Functional interface for defining a callback function to be executed when a meeting is completed.
@@ -43,7 +41,7 @@ public class MeetingServiceClient {
     }
 
     // Method to schedule a meeting using the blocking stub
-    public ScheduleMeetingResponse scheduleMeeting(Meeting meeting) {
+    public ScheduleMeetingResponse showScheduleMeetingUI(Meeting meeting) {
         // Create a request object with the meeting to be scheduled
         ScheduleMeetingRequest request = ScheduleMeetingRequest.newBuilder().setMeeting(meeting).build();
         // Call the scheduleMeeting method of the blocking stub with the request object and return the response
@@ -111,7 +109,7 @@ public class MeetingServiceClient {
      If the user is not logged in, throws an exception.
      @throws Exception if the user is not logged in
      */
-    void listAllMeetings() throws Exception {
+    void showMeetingsListUI() throws Exception {
         String userId = UserContext.getLoggedInUserId();
 
         if (userId == null) {
@@ -135,7 +133,7 @@ public class MeetingServiceClient {
      Prompts the user to enter a meeting ID and participant ID, then adds the participant to the specified meeting.
      @throws Exception if the user is not logged in or the participant cannot be added to the meeting
      */
-    void addParticipantToMeeting() throws Exception {
+    void showAddParticipantToMeetingUI() throws Exception {
         String meetingId = JOptionPane.showInputDialog("Enter Meeting ID:");
         String participantId = JOptionPane.showInputDialog("Enter Participant ID:");
 
@@ -153,7 +151,7 @@ public class MeetingServiceClient {
      user input, and calls the scheduleMeeting() method of the MeetingServiceGrpc to schedule the meeting
      @return void
      */
-    void scheduleMeeting() {
+    void showScheduleMeetingUI() {
 
         // Create a panel with fields to get user input
         JPanel panel = new JPanel(new GridLayout(0, 1));
@@ -202,7 +200,7 @@ public class MeetingServiceClient {
                     .build();
 
             // Call the scheduleMeeting() method of the MeetingServiceGrpc to schedule the meeting
-            ScheduleMeetingResponse response = scheduleMeeting(meeting);
+            ScheduleMeetingResponse response = showScheduleMeetingUI(meeting);
 
             if (!response.getId().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Meeting scheduled with ID: " + response.getId());

@@ -78,61 +78,6 @@ public class CalendarServiceImpl extends CalendarServiceGrpc.CalendarServiceImpl
         };
     }
 
-    // Implement the getEvents() method
-    @Override
-    public StreamObserver<GetEventRequest> getEvents(StreamObserver<Event> responseObserver) {
-
-        // Get the user ID from the UserContext class
-        String userId = UserContext.getLoggedInUserId();
-
-        // Return a new StreamObserver object
-        return new StreamObserver<GetEventRequest>() {
-
-            // Implement the onNext() method
-            @Override
-            public void onNext(GetEventRequest getEventRequest) {
-
-                // Get the ID of the requested event from the request
-                String eventId = getEventRequest.getId();
-
-                // Search the database for the event with the specified ID
-                Event event = database.getCalendarEvents(userId).stream()
-                        .filter(e -> e.getId().equals(eventId))
-                        .map(e -> Event.newBuilder()
-                                .setId(e.getId())
-                                .setTitle(e.getTitle())
-                                .setDescription(e.getDescription())
-                                .setStartTime(e.getStartTime())
-                                .setEndTime(e.getEndTime())
-                                .addAttendee(userId)
-                                .build())
-                        .findFirst()
-                        .orElseThrow(() -> new StatusRuntimeException(Status.NOT_FOUND));
-
-                // Log the event details
-                logger.info(event.getTitle());
-                logger.info(eventId);
-
-                // Send the event details to the client
-                responseObserver.onNext(event);
-            }
-
-            // Implement the onError() method
-            @Override
-            public void onError(Throwable throwable) {
-                // Send the error to the client
-                responseObserver.onError(throwable);
-            }
-
-            // Implement the onCompleted() method
-            @Override
-            public void onCompleted() {
-                // Notify the client that the operation has completed
-                responseObserver.onCompleted();
-            }
-        };
-    }
-
     // Implement the listEvents() method
     @Override
     public void listEvents(Empty request, StreamObserver<Event> responseObserver) {

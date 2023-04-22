@@ -489,21 +489,21 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
  This method is called when the "Schedule Meeting" button is clicked and calls the scheduleMeeting method of the MeetingServiceClient object.
  */
     private void scheduleMeeting() {
-        meetingService.scheduleMeeting();
+        meetingService.showScheduleMeetingUI();
     }
     /*
 
     This method is called when the "Schedule Event" button is clicked and calls the scheduleEvent method of the CalendarServiceClient object.
     */
     private void scheduleEvent() {
-        calendarService.scheduleEvent();
+        calendarService.showScheduleEventUI();
     }
     /*
 
     This method is called when the "Schedule Reminder" button is clicked and calls the showScheduleReminderDialog method of the ReminderServiceClient object.
     */
     private void scheduleReminder() {
-        reminderService.showScheduleReminderDialog();
+        reminderService.showScheduleReminderUI();
     }
     /*
 
@@ -511,7 +511,7 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
     */
     private void displayAllEvents() {
         try {
-            calendarService.listAllEvents();
+            calendarService.showEventsListUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -522,7 +522,7 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
     */
     private void subscribeToEvent() {
         try {
-            calendarService.subscribe();
+            calendarService.showSubscribeToEventsUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -533,7 +533,7 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
     */
     private void addParticipantToMeeting() {
         try {
-            meetingService.addParticipantToMeeting();
+            meetingService.showAddParticipantToMeetingUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -544,7 +544,7 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
     */
     private void displayAllMeetings() {
         try {
-            meetingService.listAllMeetings();
+            meetingService.showMeetingsListUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -555,7 +555,7 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
     */
     private void deleteReminder() {
         try {
-            reminderService.deleteReminder();
+            reminderService.showDeleteReminderUI();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -567,7 +567,7 @@ public class ScheduleProUI extends JFrame implements ServiceListener {
     private void displayAllReminders() {
         lblStatus.setText("List of Reminders");
         try {
-            reminderService.showListRemindersDialog(this);
+            reminderService.showListRemindersUI(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

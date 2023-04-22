@@ -123,70 +123,6 @@ public final class MeetingServiceGrpc {
      return getAddParticipantMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<schedulePro.meeting.RemoveParticipantRequest,
-      schedulePro.meeting.SharedResponse> getRemoveParticipantMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "RemoveParticipant",
-      requestType = schedulePro.meeting.RemoveParticipantRequest.class,
-      responseType = schedulePro.meeting.SharedResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<schedulePro.meeting.RemoveParticipantRequest,
-      schedulePro.meeting.SharedResponse> getRemoveParticipantMethod() {
-    io.grpc.MethodDescriptor<schedulePro.meeting.RemoveParticipantRequest, schedulePro.meeting.SharedResponse> getRemoveParticipantMethod;
-    if ((getRemoveParticipantMethod = MeetingServiceGrpc.getRemoveParticipantMethod) == null) {
-      synchronized (MeetingServiceGrpc.class) {
-        if ((getRemoveParticipantMethod = MeetingServiceGrpc.getRemoveParticipantMethod) == null) {
-          MeetingServiceGrpc.getRemoveParticipantMethod = getRemoveParticipantMethod = 
-              io.grpc.MethodDescriptor.<schedulePro.meeting.RemoveParticipantRequest, schedulePro.meeting.SharedResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "schedulePro.meeting.MeetingService", "RemoveParticipant"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  schedulePro.meeting.RemoveParticipantRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  schedulePro.meeting.SharedResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new MeetingServiceMethodDescriptorSupplier("RemoveParticipant"))
-                  .build();
-          }
-        }
-     }
-     return getRemoveParticipantMethod;
-  }
-
-  private static volatile io.grpc.MethodDescriptor<schedulePro.meeting.MeetingNotification,
-      schedulePro.meeting.SharedResponse> getNotifyParticipantsMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "NotifyParticipants",
-      requestType = schedulePro.meeting.MeetingNotification.class,
-      responseType = schedulePro.meeting.SharedResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-  public static io.grpc.MethodDescriptor<schedulePro.meeting.MeetingNotification,
-      schedulePro.meeting.SharedResponse> getNotifyParticipantsMethod() {
-    io.grpc.MethodDescriptor<schedulePro.meeting.MeetingNotification, schedulePro.meeting.SharedResponse> getNotifyParticipantsMethod;
-    if ((getNotifyParticipantsMethod = MeetingServiceGrpc.getNotifyParticipantsMethod) == null) {
-      synchronized (MeetingServiceGrpc.class) {
-        if ((getNotifyParticipantsMethod = MeetingServiceGrpc.getNotifyParticipantsMethod) == null) {
-          MeetingServiceGrpc.getNotifyParticipantsMethod = getNotifyParticipantsMethod = 
-              io.grpc.MethodDescriptor.<schedulePro.meeting.MeetingNotification, schedulePro.meeting.SharedResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "schedulePro.meeting.MeetingService", "NotifyParticipants"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  schedulePro.meeting.MeetingNotification.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  schedulePro.meeting.SharedResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new MeetingServiceMethodDescriptorSupplier("NotifyParticipants"))
-                  .build();
-          }
-        }
-     }
-     return getNotifyParticipantsMethod;
-  }
-
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -244,26 +180,6 @@ public final class MeetingServiceGrpc {
       asyncUnimplementedUnaryCall(getAddParticipantMethod(), responseObserver);
     }
 
-    /**
-     * <pre>
-     * Removes a participant from a meeting.
-     * </pre>
-     */
-    public void removeParticipant(schedulePro.meeting.RemoveParticipantRequest request,
-        io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getRemoveParticipantMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Notifies all participants of a meeting that it is starting and ending.
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<schedulePro.meeting.MeetingNotification> notifyParticipants(
-        io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getNotifyParticipantsMethod(), responseObserver);
-    }
-
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -287,20 +203,6 @@ public final class MeetingServiceGrpc {
                 schedulePro.meeting.AddParticipantRequest,
                 schedulePro.meeting.SharedResponse>(
                   this, METHODID_ADD_PARTICIPANT)))
-          .addMethod(
-            getRemoveParticipantMethod(),
-            asyncUnaryCall(
-              new MethodHandlers<
-                schedulePro.meeting.RemoveParticipantRequest,
-                schedulePro.meeting.SharedResponse>(
-                  this, METHODID_REMOVE_PARTICIPANT)))
-          .addMethod(
-            getNotifyParticipantsMethod(),
-            asyncClientStreamingCall(
-              new MethodHandlers<
-                schedulePro.meeting.MeetingNotification,
-                schedulePro.meeting.SharedResponse>(
-                  this, METHODID_NOTIFY_PARTICIPANTS)))
           .build();
     }
   }
@@ -355,28 +257,6 @@ public final class MeetingServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getAddParticipantMethod(), getCallOptions()), request, responseObserver);
     }
-
-    /**
-     * <pre>
-     * Removes a participant from a meeting.
-     * </pre>
-     */
-    public void removeParticipant(schedulePro.meeting.RemoveParticipantRequest request,
-        io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getRemoveParticipantMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Notifies all participants of a meeting that it is starting and ending.
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<schedulePro.meeting.MeetingNotification> notifyParticipants(
-        io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse> responseObserver) {
-      return asyncClientStreamingCall(
-          getChannel().newCall(getNotifyParticipantsMethod(), getCallOptions()), responseObserver);
-    }
   }
 
   /**
@@ -427,16 +307,6 @@ public final class MeetingServiceGrpc {
       return blockingUnaryCall(
           getChannel(), getAddParticipantMethod(), getCallOptions(), request);
     }
-
-    /**
-     * <pre>
-     * Removes a participant from a meeting.
-     * </pre>
-     */
-    public schedulePro.meeting.SharedResponse removeParticipant(schedulePro.meeting.RemoveParticipantRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getRemoveParticipantMethod(), getCallOptions(), request);
-    }
   }
 
   /**
@@ -478,24 +348,11 @@ public final class MeetingServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getAddParticipantMethod(), getCallOptions()), request);
     }
-
-    /**
-     * <pre>
-     * Removes a participant from a meeting.
-     * </pre>
-     */
-    public com.google.common.util.concurrent.ListenableFuture<schedulePro.meeting.SharedResponse> removeParticipant(
-        schedulePro.meeting.RemoveParticipantRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getRemoveParticipantMethod(), getCallOptions()), request);
-    }
   }
 
   private static final int METHODID_SCHEDULE_MEETING = 0;
   private static final int METHODID_LIST_MEETINGS = 1;
   private static final int METHODID_ADD_PARTICIPANT = 2;
-  private static final int METHODID_REMOVE_PARTICIPANT = 3;
-  private static final int METHODID_NOTIFY_PARTICIPANTS = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -526,10 +383,6 @@ public final class MeetingServiceGrpc {
           serviceImpl.addParticipant((schedulePro.meeting.AddParticipantRequest) request,
               (io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse>) responseObserver);
           break;
-        case METHODID_REMOVE_PARTICIPANT:
-          serviceImpl.removeParticipant((schedulePro.meeting.RemoveParticipantRequest) request,
-              (io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -540,9 +393,6 @@ public final class MeetingServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_NOTIFY_PARTICIPANTS:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.notifyParticipants(
-              (io.grpc.stub.StreamObserver<schedulePro.meeting.SharedResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -597,8 +447,6 @@ public final class MeetingServiceGrpc {
               .addMethod(getScheduleMeetingMethod())
               .addMethod(getListMeetingsMethod())
               .addMethod(getAddParticipantMethod())
-              .addMethod(getRemoveParticipantMethod())
-              .addMethod(getNotifyParticipantsMethod())
               .build();
         }
       }

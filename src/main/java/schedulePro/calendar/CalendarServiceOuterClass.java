@@ -87,16 +87,14 @@ public final class CalendarServiceOuterClass {
       "t\022\n\n\002id\030\001 \001(\t\"7\n\030SubscribeToEventRespons" +
       "e\022\n\n\002id\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"+\n\027Subscr" +
       "ibeToEventRequest\022\020\n\010event_id\030\001 \001(\t\"!\n\016S" +
-      "haredResponse\022\017\n\007success\030\001 \001(\0102\260\002\n\017Calen" +
+      "haredResponse\022\017\n\007success\030\001 \001(\0102\361\001\n\017Calen" +
       "darService\022H\n\tAddEvents\022\031.calendar.AddEv" +
       "entRequest\032\032.calendar.AddEventResponse\"\000" +
-      "(\0010\001\022=\n\tGetEvents\022\031.calendar.GetEventReq" +
-      "uest\032\017.calendar.Event\"\000(\0010\001\0222\n\nListEvent" +
-      "s\022\017.calendar.Empty\032\017.calendar.Event\"\0000\001\022" +
-      "`\n\021SubscribeToEvents\022!.calendar.Subscrib" +
-      "eToEventRequest\032\".calendar.SubscribeToEv" +
-      "entResponse\"\000(\0010\001B\030\n\024schedulePro.calenda" +
-      "rP\001b\006proto3"
+      "(\0010\001\0222\n\nListEvents\022\017.calendar.Empty\032\017.ca" +
+      "lendar.Event\"\0000\001\022`\n\021SubscribeToEvents\022!." +
+      "calendar.SubscribeToEventRequest\032\".calen" +
+      "dar.SubscribeToEventResponse\"\000(\0010\001B\030\n\024sc" +
+      "hedulePro.calendarP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

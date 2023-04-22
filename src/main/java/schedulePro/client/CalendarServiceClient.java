@@ -42,7 +42,7 @@ public class CalendarServiceClient {
     }
 
     // Method for scheduling an event
-    public void scheduleEvent(AddEventRequest request,  CompletionFunc func) {
+    private void showScheduleEventUI(AddEventRequest request, CompletionFunc func) {
         // Creating a stream observer to handle responses from the server
         StreamObserver<AddEventRequest> requestObserver = asyncStub.addEvents(new StreamObserver<AddEventResponse>() {
             // Handling successful responses
@@ -67,7 +67,7 @@ public class CalendarServiceClient {
     }
 
     // Method for listing all events
-    public String listEvents() {
+    private String listEvents() {
         // Creating an empty request to send to the server
         schedulePro.calendar.Empty listEventsRequest = schedulePro.calendar.Empty.newBuilder().build();
         // Retrieving an iterator for the events
@@ -93,7 +93,7 @@ public class CalendarServiceClient {
     }
 
     // Method for subscribing to an event
-    public void subscribeToEvent(SubscribeToEventRequest request, SubscribeCompletionFunc func) {
+    private void subscribeToEvent(SubscribeToEventRequest request, SubscribeCompletionFunc func) {
         // Creating a stream observer to handle responses from the server
         StreamObserver<SubscribeToEventRequest> requestObserver = asyncStub.subscribeToEvents(new StreamObserver<SubscribeToEventResponse>() {
             // Handling successful responses
@@ -119,7 +119,7 @@ public class CalendarServiceClient {
 
 
     // This method displays a dialog box for scheduling a new event by taking user inputs for the event's title, description, start and end time.
-    void scheduleEvent() {
+    void showScheduleEventUI() {
         // create a new panel with a grid layout
         JPanel panel = new JPanel(new GridLayout(0, 1));
 
@@ -165,7 +165,7 @@ public class CalendarServiceClient {
                     .build();
 
             // send the request to the server for scheduling and display the result to the user
-            scheduleEvent(request, (response, throwable) -> {
+            showScheduleEventUI(request, (response, throwable) -> {
                 if (!response.getId().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Meeting scheduled with ID: " + response.getId());
                 } else {
@@ -176,7 +176,7 @@ public class CalendarServiceClient {
     }
 
     // This method retrieves all events from the server and displays them in a scrollable dialog box.
-    void listAllEvents() throws Exception {
+    void showEventsListUI() throws Exception {
         // get the logged in user's id
         String userId = UserContext.getLoggedInUserId();
 
@@ -206,7 +206,7 @@ public class CalendarServiceClient {
      Builds a new SubscribeToEventRequest object using the entered event ID.
      Calls the subscribeToEvent method and passes the request object along with a CompletionFunc to handle the response.
      */
-    void subscribe() throws Exception {
+    void showSubscribeToEventsUI() throws Exception {
 
         // Prompt user to enter event ID
         String eventId = JOptionPane.showInputDialog("Enter Event ID:");

@@ -9,8 +9,5 @@
         <module name="SchedulePro" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="SchedulePro" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

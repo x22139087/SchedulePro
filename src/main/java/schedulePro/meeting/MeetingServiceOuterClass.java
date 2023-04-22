@@ -76,7 +76,7 @@ public final class MeetingServiceOuterClass {
       "C\n\025AddParticipantRequest\022\022\n\nmeeting_id\030\001" +
       " \001(\t\022\026\n\016participant_id\030\002 \001(\t\"F\n\030RemovePa" +
       "rticipantRequest\022\022\n\nmeeting_id\030\001 \001(\t\022\026\n\016" +
-      "participant_id\030\002 \001(\t2\207\004\n\016MeetingService\022" +
+      "participant_id\030\002 \001(\t2\263\002\n\016MeetingService\022" +
       "n\n\017ScheduleMeeting\022+.schedulePro.meeting" +
       ".ScheduleMeetingRequest\032,.schedulePro.me" +
       "eting.ScheduleMeetingResponse\"\000\022L\n\014ListM" +
@@ -84,13 +84,8 @@ public final class MeetingServiceOuterClass {
       "hedulePro.meeting.Meeting\"\0000\001\022c\n\016AddPart" +
       "icipant\022*.schedulePro.meeting.AddPartici" +
       "pantRequest\032#.schedulePro.meeting.Shared" +
-      "Response\"\000\022i\n\021RemoveParticipant\022-.schedu" +
-      "lePro.meeting.RemoveParticipantRequest\032#" +
-      ".schedulePro.meeting.SharedResponse\"\000\022g\n" +
-      "\022NotifyParticipants\022(.schedulePro.meetin" +
-      "g.MeetingNotification\032#.schedulePro.meet" +
-      "ing.SharedResponse\"\000(\001B\027\n\023schedulePro.me" +
-      "etingP\001b\006proto3"
+      "Response\"\000B\027\n\023schedulePro.meetingP\001b\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

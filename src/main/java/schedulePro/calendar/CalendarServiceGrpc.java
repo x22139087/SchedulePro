@@ -59,38 +59,6 @@ public final class CalendarServiceGrpc {
      return getAddEventsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<schedulePro.calendar.GetEventRequest,
-      schedulePro.calendar.Event> getGetEventsMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetEvents",
-      requestType = schedulePro.calendar.GetEventRequest.class,
-      responseType = schedulePro.calendar.Event.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<schedulePro.calendar.GetEventRequest,
-      schedulePro.calendar.Event> getGetEventsMethod() {
-    io.grpc.MethodDescriptor<schedulePro.calendar.GetEventRequest, schedulePro.calendar.Event> getGetEventsMethod;
-    if ((getGetEventsMethod = CalendarServiceGrpc.getGetEventsMethod) == null) {
-      synchronized (CalendarServiceGrpc.class) {
-        if ((getGetEventsMethod = CalendarServiceGrpc.getGetEventsMethod) == null) {
-          CalendarServiceGrpc.getGetEventsMethod = getGetEventsMethod = 
-              io.grpc.MethodDescriptor.<schedulePro.calendar.GetEventRequest, schedulePro.calendar.Event>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-              .setFullMethodName(generateFullMethodName(
-                  "calendar.CalendarService", "GetEvents"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  schedulePro.calendar.GetEventRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  schedulePro.calendar.Event.getDefaultInstance()))
-                  .setSchemaDescriptor(new CalendarServiceMethodDescriptorSupplier("GetEvents"))
-                  .build();
-          }
-        }
-     }
-     return getGetEventsMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<schedulePro.calendar.Empty,
       schedulePro.calendar.Event> getListEventsMethod;
 
@@ -194,16 +162,6 @@ public final class CalendarServiceGrpc {
 
     /**
      * <pre>
-     * Retrieves events with given IDs.
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<schedulePro.calendar.GetEventRequest> getEvents(
-        io.grpc.stub.StreamObserver<schedulePro.calendar.Event> responseObserver) {
-      return asyncUnimplementedStreamingCall(getGetEventsMethod(), responseObserver);
-    }
-
-    /**
-     * <pre>
      * Retrieves all events for the current user.
      * </pre>
      */
@@ -231,13 +189,6 @@ public final class CalendarServiceGrpc {
                 schedulePro.calendar.AddEventRequest,
                 schedulePro.calendar.AddEventResponse>(
                   this, METHODID_ADD_EVENTS)))
-          .addMethod(
-            getGetEventsMethod(),
-            asyncBidiStreamingCall(
-              new MethodHandlers<
-                schedulePro.calendar.GetEventRequest,
-                schedulePro.calendar.Event>(
-                  this, METHODID_GET_EVENTS)))
           .addMethod(
             getListEventsMethod(),
             asyncServerStreamingCall(
@@ -283,17 +234,6 @@ public final class CalendarServiceGrpc {
         io.grpc.stub.StreamObserver<schedulePro.calendar.AddEventResponse> responseObserver) {
       return asyncBidiStreamingCall(
           getChannel().newCall(getAddEventsMethod(), getCallOptions()), responseObserver);
-    }
-
-    /**
-     * <pre>
-     * Retrieves events with given IDs.
-     * </pre>
-     */
-    public io.grpc.stub.StreamObserver<schedulePro.calendar.GetEventRequest> getEvents(
-        io.grpc.stub.StreamObserver<schedulePro.calendar.Event> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getGetEventsMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -370,8 +310,7 @@ public final class CalendarServiceGrpc {
 
   private static final int METHODID_LIST_EVENTS = 0;
   private static final int METHODID_ADD_EVENTS = 1;
-  private static final int METHODID_GET_EVENTS = 2;
-  private static final int METHODID_SUBSCRIBE_TO_EVENTS = 3;
+  private static final int METHODID_SUBSCRIBE_TO_EVENTS = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -407,9 +346,6 @@ public final class CalendarServiceGrpc {
         case METHODID_ADD_EVENTS:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.addEvents(
               (io.grpc.stub.StreamObserver<schedulePro.calendar.AddEventResponse>) responseObserver);
-        case METHODID_GET_EVENTS:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getEvents(
-              (io.grpc.stub.StreamObserver<schedulePro.calendar.Event>) responseObserver);
         case METHODID_SUBSCRIBE_TO_EVENTS:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.subscribeToEvents(
               (io.grpc.stub.StreamObserver<schedulePro.calendar.SubscribeToEventResponse>) responseObserver);
@@ -465,7 +401,6 @@ public final class CalendarServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new CalendarServiceFileDescriptorSupplier())
               .addMethod(getAddEventsMethod())
-              .addMethod(getGetEventsMethod())
               .addMethod(getListEventsMethod())
               .addMethod(getSubscribeToEventsMethod())
               .build();
