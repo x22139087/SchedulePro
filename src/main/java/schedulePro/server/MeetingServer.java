@@ -4,7 +4,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import schedulePro.meeting.MeetingServiceGrpc;
 import schedulePro.services.MeetingServiceImpl;
-import schedulePro.utils.InMemoryDatabase;
+import schedulePro.db.InMemoryDatabase;
 
 import java.io.IOException;
 

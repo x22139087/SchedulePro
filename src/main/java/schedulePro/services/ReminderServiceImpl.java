@@ -3,12 +3,11 @@ package schedulePro.services;
 
 import io.grpc.stub.StreamObserver;
 import schedulePro.reminder.*;
-import schedulePro.utils.UserContext;
-import schedulePro.utils.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
+import schedulePro.db.InMemoryDatabase;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ReminderServiceImpl extends ReminderServiceGrpc.ReminderServiceImplBase {

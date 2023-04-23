@@ -1,4 +1,4 @@
-package schedulePro.utils;
+package schedulePro.helpers;
 
 public class UserContext {
     private static String loggedInUserId = "";

@@ -16,15 +16,11 @@ import java.util.logging.Logger;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
 import schedulePro.meeting.*;
 import schedulePro.server.MeetingServer;
-import schedulePro.server.UserServer;
 import schedulePro.services.MeetingServiceImpl;
-import schedulePro.utils.InMemoryDatabase;
-import schedulePro.utils.UserContext;
+import schedulePro.db.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
 
 public class MeetingServiceImplTest {
     private static final Logger logger = Logger.getLogger(MeetingServiceImplTest.class.getName());
@@ -117,9 +113,9 @@ public class MeetingServiceImplTest {
 
         database = new InMemoryDatabase();
         service = new MeetingServiceImpl(database);
-        MeetingServer server = new MeetingServer(8080, service);
+        MeetingServer server = new MeetingServer(8081, service);
         server.start();
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080).usePlaintext().build();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8081).usePlaintext().build();
         stub = MeetingServiceGrpc.newStub(channel);
 
         // Set up

@@ -5,8 +5,8 @@ import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import schedulePro.calendar.*;
 import schedulePro.server.UserServer;
-import schedulePro.utils.InMemoryDatabase;
-import schedulePro.utils.UserContext;
+import schedulePro.db.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
 
 import java.util.UUID;
 import java.util.logging.Logger;

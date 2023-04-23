@@ -5,7 +5,7 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import schedulePro.calendar.*;
 import schedulePro.calendar.Event;
-import schedulePro.utils.UserContext;
+import schedulePro.helpers.UserContext;
 
 import javax.swing.*;
 import java.awt.*;

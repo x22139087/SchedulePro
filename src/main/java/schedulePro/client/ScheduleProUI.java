@@ -8,8 +8,8 @@ import schedulePro.services.CalendarServiceImpl;
 import schedulePro.services.MeetingServiceImpl;
 import schedulePro.services.ReminderServiceImpl;
 import schedulePro.services.UserServiceImpl;
-import schedulePro.utils.InMemoryDatabase;
-import schedulePro.utils.UserContext;
+import schedulePro.db.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;

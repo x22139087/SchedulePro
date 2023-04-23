@@ -4,7 +4,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import schedulePro.calendar.AddEventResponse;
 import schedulePro.meeting.*;
-import schedulePro.utils.UserContext;
+import schedulePro.helpers.UserContext;
 
 import javax.swing.*;
 import java.awt.*;

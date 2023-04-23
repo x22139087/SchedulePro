@@ -1,4 +1,4 @@
-package schedulePro.utils;
+package schedulePro.db;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -9,6 +9,7 @@ import schedulePro.calendar.Event;
 import schedulePro.meeting.Meeting;
 import schedulePro.reminder.Reminder;
 import schedulePro.user.User;
+import schedulePro.helpers.UserContext;
 
 public class InMemoryDatabase {
     private final Map<String, List<Event>> calendarDatabase = new HashMap<>();

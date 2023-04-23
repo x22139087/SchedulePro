@@ -1,7 +1,5 @@
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.Status;
-import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import org.junit.After;
 import org.junit.Before;
@@ -9,8 +7,8 @@ import org.junit.Test;
 import schedulePro.reminder.*;
 import schedulePro.server.ReminderServer;
 import schedulePro.services.ReminderServiceImpl;
-import schedulePro.utils.InMemoryDatabase;
-import schedulePro.utils.UserContext;
+import schedulePro.db.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
 
 import java.io.IOException;
 import java.util.ArrayList;

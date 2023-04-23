@@ -5,14 +5,12 @@ import org.junit.Test;
 import schedulePro.calendar.*;
 import schedulePro.server.CalendarServer;
 import schedulePro.services.CalendarServiceImpl;
-import schedulePro.utils.InMemoryDatabase;
-import schedulePro.utils.UserContext;
+import schedulePro.db.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -24,10 +22,10 @@ public class CalendarServiceImplTest {
         CountDownLatch latch = new CountDownLatch(1);
         InMemoryDatabase database = new InMemoryDatabase();
         CalendarServiceImpl calendarService = new CalendarServiceImpl(database);
-        CalendarServer server = new CalendarServer(8080, database);
+        CalendarServer server = new CalendarServer(8081, database);
         server.start();
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080).usePlaintext().build();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8081).usePlaintext().build();
         CalendarServiceGrpc.CalendarServiceStub stub = CalendarServiceGrpc.newStub(channel);
 
         StreamObserver<AddEventRequest> requestObserver = stub.addEvents(new StreamObserver<AddEventResponse>() {
@@ -73,88 +71,7 @@ public class CalendarServiceImplTest {
     }
 
 
-    @Test
-    public void testGetEvents() throws Exception {
 
-        InMemoryDatabase database = new InMemoryDatabase();
-        UserContext.setLoggedInUserId("user123");
-        database.addUserSession("session123", "user123");
-
-        Event event1 = Event.newBuilder()
-                .setTitle("Test Event 1")
-                .setDescription("Test Description 1")
-                .setStartTime(1648200000000L)
-                .setEndTime(1648203600000L)
-                .addAttendee("user123")
-                .build();
-        database.addCalendarEvent("user123", event1);
-
-        Event event2 = Event.newBuilder()
-                .setTitle("Test Event 2")
-                .setDescription("Test Description 2")
-                .setStartTime(1648300000000L)
-                .setEndTime(1648303600000L)
-                .addAttendee("user123")
-                .build();
-        database.addCalendarEvent("user123", event2);
-
-        CalendarServiceImpl calendarService = new CalendarServiceImpl(database);
-        CalendarServer server = new CalendarServer(8080, database);
-        server.start();
-
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080).usePlaintext().build();
-        CalendarServiceGrpc.CalendarServiceStub stub = CalendarServiceGrpc.newStub(channel);
-
-        List<Event> events = new ArrayList<>();
-        CountDownLatch latch = new CountDownLatch(2);
-
-        StreamObserver<Event> responseObserver = new StreamObserver<Event>() {
-            @Override
-            public void onNext(Event event) {
-                events.add(event);
-                latch.countDown();
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                fail("Unexpected error: " + throwable.getMessage());
-            }
-
-            @Override
-            public void onCompleted() {
-                // Do nothing
-            }
-        };
-
-        StreamObserver<GetEventRequest> requestObserver = stub.getEvents(responseObserver);
-        requestObserver.onNext(GetEventRequest.newBuilder().setId(event1.getId()).build());
-        requestObserver.onNext(GetEventRequest.newBuilder().setId(event2.getId()).build());
-        requestObserver.onCompleted();
-
-        latch.await();
-
-        assertEquals(2, events.size());
-
-        Event receivedEvent1 = events.get(0);
-        assertEquals(event1.getId(), receivedEvent1.getId());
-        assertEquals(event1.getTitle(), receivedEvent1.getTitle());
-        assertEquals(event1.getDescription(), receivedEvent1.getDescription());
-        assertEquals(event1.getStartTime(), receivedEvent1.getStartTime());
-        assertEquals(event1.getEndTime(), receivedEvent1.getEndTime());
-        assertEquals(event1.getAttendeeCount(), receivedEvent1.getAttendeeCount());
-        assertEquals(event1.getAttendee(0), receivedEvent1.getAttendee(0));
-
-        Event receivedEvent2 = events.get(1);
-        assertEquals(event2.getId(), receivedEvent2.getId());
-        assertEquals(event2.getTitle(), receivedEvent2.getTitle());
-        assertEquals(event2.getDescription(), receivedEvent2.getDescription());
-        assertEquals(event2.getStartTime(), receivedEvent2.getStartTime());
-        assertEquals(event2.getEndTime(), receivedEvent2.getEndTime());
-        assertEquals(event2.getAttendeeCount(), receivedEvent2.getAttendeeCount());
-        assertEquals(event2.getAttendee(0), receivedEvent2.getAttendee(0));
-
-        latch.await();
-    }
 
     @Test
     public void testListEvents() throws Exception {

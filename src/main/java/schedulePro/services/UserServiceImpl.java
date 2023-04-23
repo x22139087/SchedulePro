@@ -4,7 +4,7 @@ import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import schedulePro.user.*;
-import schedulePro.utils.InMemoryDatabase;
+import schedulePro.db.InMemoryDatabase;
 
 import java.util.*;
 

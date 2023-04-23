@@ -7,8 +7,8 @@ import io.grpc.stub.StreamObserver;
 import java.util.logging.Logger;
 
 import schedulePro.meeting.*;
-import schedulePro.utils.InMemoryDatabase;
-import schedulePro.utils.UserContext;
+import schedulePro.db.InMemoryDatabase;
+import schedulePro.helpers.UserContext;
 
 public class MeetingServiceImpl extends MeetingServiceGrpc.MeetingServiceImplBase {
     // Define a private static logger object to log events

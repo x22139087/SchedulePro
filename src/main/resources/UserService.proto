@@ -20,8 +20,6 @@ service UserService {
   // Registers a new user.
   rpc Register(RegisterRequest) returns (RegisterResponse) {}
 
-  // Streaming bidirectionally the list of logged in users
-  rpc ListLoggedInUsers(Empty) returns (stream User) {}
 }
 
 message LogoutRequest {
@@ -57,9 +55,4 @@ message RegisterRequest {
 
 message RegisterResponse {
   string message = 1;
-}
-
-message User {
-  string id = 1;
-  string username = 2;
 }

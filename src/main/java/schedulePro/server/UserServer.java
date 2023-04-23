@@ -3,7 +3,7 @@ package schedulePro.server;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import schedulePro.services.UserServiceImpl;
-import schedulePro.utils.InMemoryDatabase;
+import schedulePro.db.InMemoryDatabase;
 
 import java.io.IOException;
 import java.util.logging.Logger;
